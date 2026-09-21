@@ -1,0 +1,349 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AgentPro - Agent Management System</title>
+
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+    <!-- Header -->
+    <header>
+        <div class="logo">Agent<span>Pro</span></div>
+
+        <nav>
+            <a href="#dashboard">Dashboard</a>
+            <a href="#agents">Agents</a>
+            <a href="#commission">Commission</a>
+            <a href="#performance">Performance</a>
+            <a href="#training">Training</a>
+            <a href="#reports">Reports</a>
+        </nav>
+
+        <button class="logout" onclick="logout()">Logout</button>
+    </header>
+
+
+    <!-- Dashboard -->
+    <section id="dashboard" class="container">
+
+        <div class="welcome">
+            <div>
+                <h1>Agent Management System</h1>
+                <p>Manage agents, performance, commissions and training in one place.</p>
+            </div>
+
+            <button onclick="showRegistration()">+ Add Agent</button>
+        </div>
+
+
+        <!-- Statistics -->
+        <div class="stats">
+
+            <div class="card">
+                <h3>Total Agents</h3>
+                <h2 id="totalAgents">4</h2>
+                <p>Registered agents</p>
+            </div>
+
+            <div class="card">
+                <h3>Active Agents</h3>
+                <h2 id="activeAgents">3</h2>
+                <p>Currently active</p>
+            </div>
+
+            <div class="card">
+                <h3>Total Commission</h3>
+                <h2>₹48,500</h2>
+                <p>This month</p>
+            </div>
+
+            <div class="card">
+                <h3>Top Performer</h3>
+                <h2>Rahul</h2>
+                <p>Excellent performance</p>
+            </div>
+
+        </div>
+
+
+        <!-- Agent Registration -->
+        <div id="registration" class="section-box hidden">
+
+            <h2>Agent Registration</h2>
+
+            <form onsubmit="addAgent(event)">
+
+                <input type="text" id="agentName" placeholder="Agent Name" required>
+
+                <input type="email" id="agentEmail" placeholder="Email" required>
+
+                <input type="text" id="agentPhone" placeholder="Phone Number" required>
+
+                <input type="text" id="agentLocation" placeholder="Location" required>
+
+                <select id="agentStatus">
+                    <option value="Active">Active</option>
+                    <option value="In Training">In Training</option>
+                    <option value="On Leave">On Leave</option>
+                </select>
+
+                <button type="submit">Register Agent</button>
+
+            </form>
+
+        </div>
+
+
+        <!-- Agents -->
+        <section id="agents" class="section-box">
+
+            <div class="section-title">
+                <div>
+                    <h2>Agent Listing</h2>
+                    <p>View and manage all registered agents.</p>
+                </div>
+
+                <input
+                    type="text"
+                    id="searchAgent"
+                    placeholder="Search agent..."
+                    onkeyup="searchAgents()"
+                >
+            </div>
+
+
+            <div class="table-container">
+
+                <table>
+
+                    <thead>
+                        <tr>
+                            <th>Agent ID</th>
+                            <th>Name</th>
+                            <th>Email</th>
+                            <th>Location</th>
+                            <th>Status</th>
+                            <th>Performance</th>
+                        </tr>
+                    </thead>
+
+                    <tbody id="agentTable">
+
+                        <tr>
+                            <td>AG001</td>
+                            <td>Rahul Kumar</td>
+                            <td>rahul@gmail.com</td>
+                            <td>Hyderabad</td>
+                            <td><span class="active">Active</span></td>
+                            <td>95%</td>
+                        </tr>
+
+                        <tr>
+                            <td>AG002</td>
+                            <td>Priya Sharma</td>
+                            <td>priya@gmail.com</td>
+                            <td>Vijayawada</td>
+                            <td><span class="active">Active</span></td>
+                            <td>90%</td>
+                        </tr>
+
+                        <tr>
+                            <td>AG003</td>
+                            <td>Arjun Reddy</td>
+                            <td>arjun@gmail.com</td>
+                            <td>Visakhapatnam</td>
+                            <td><span class="training">In Training</span></td>
+                            <td>78%</td>
+                        </tr>
+
+                        <tr>
+                            <td>AG004</td>
+                            <td>Sneha Rao</td>
+                            <td>sneha@gmail.com</td>
+                            <td>Rajahmundry</td>
+                            <td><span class="active">Active</span></td>
+                            <td>88%</td>
+                        </tr>
+
+                    </tbody>
+
+                </table>
+
+            </div>
+
+        </section>
+
+
+        <!-- Commission -->
+        <section id="commission" class="section-box">
+
+            <h2>Commission Management</h2>
+
+            <div class="commission-grid">
+
+                <div class="commission-card">
+                    <h3>Total Commission</h3>
+                    <h2>₹48,500</h2>
+                    <p>Monthly commission</p>
+                </div>
+
+                <div class="commission-card">
+                    <h3>Paid Commission</h3>
+                    <h2>₹36,000</h2>
+                    <p>Already paid</p>
+                </div>
+
+                <div class="commission-card">
+                    <h3>Pending Commission</h3>
+                    <h2>₹12,500</h2>
+                    <p>Payment pending</p>
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- Performance -->
+        <section id="performance" class="section-box">
+
+            <h2>Performance Tracking</h2>
+
+            <div class="performance">
+
+                <div class="performance-row">
+                    <span>Rahul Kumar</span>
+                    <div class="progress">
+                        <div style="width:95%">95%</div>
+                    </div>
+                </div>
+
+                <div class="performance-row">
+                    <span>Priya Sharma</span>
+                    <div class="progress">
+                        <div style="width:90%">90%</div>
+                    </div>
+                </div>
+
+                <div class="performance-row">
+                    <span>Sneha Rao</span>
+                    <div class="progress">
+                        <div style="width:88%">88%</div>
+                    </div>
+                </div>
+
+                <div class="performance-row">
+                    <span>Arjun Reddy</span>
+                    <div class="progress">
+                        <div style="width:78%">78%</div>
+                    </div>
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- Training -->
+        <section id="training" class="section-box">
+
+            <h2>Training Management</h2>
+
+            <div class="training-grid">
+
+                <div class="training-card">
+                    <h3>Sales Training</h3>
+                    <p>Learn professional sales techniques.</p>
+                    <div class="small-progress">
+                        <div style="width:80%"></div>
+                    </div>
+                    <p>80% Complete</p>
+                </div>
+
+                <div class="training-card">
+                    <h3>Customer Service</h3>
+                    <p>Improve customer communication skills.</p>
+                    <div class="small-progress">
+                        <div style="width:65%"></div>
+                    </div>
+                    <p>65% Complete</p>
+                </div>
+
+                <div class="training-card">
+                    <h3>Product Knowledge</h3>
+                    <p>Learn about products and services.</p>
+                    <div class="small-progress">
+                        <div style="width:90%"></div>
+                    </div>
+                    <p>90% Complete</p>
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- Incentives -->
+        <section class="section-box">
+
+            <h2>Incentives & Rewards</h2>
+
+            <div class="reward">
+
+                <div>
+                    <h3>🏆 Top Performer</h3>
+                    <p>Rahul Kumar - 95% performance</p>
+                </div>
+
+                <div>
+                    <h3>🎁 Monthly Reward</h3>
+                    <p>₹5,000 performance bonus</p>
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- Reports -->
+        <section id="reports" class="section-box">
+
+            <h2>Reports</h2>
+
+            <div class="report-buttons">
+
+                <button onclick="showMessage('Agent report generated successfully!')">
+                    Agent Report
+                </button>
+
+                <button onclick="showMessage('Commission report generated successfully!')">
+                    Commission Report
+                </button>
+
+                <button onclick="showMessage('Performance report generated successfully!')">
+                    Performance Report
+                </button>
+
+            </div>
+
+        </section>
+
+    </section>
+
+
+    <!-- Footer -->
+    <footer>
+        <h3>AgentPro</h3>
+        <p>Agent Management System | Web Development Internship Project</p>
+        <p>© 2026 AgentPro. All Rights Reserved.</p>
+    </footer>
+
+
+    <script src="script.js"></script>
+
+</body>
+</html>
